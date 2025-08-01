@@ -90,7 +90,3 @@ Hyperparameters:
 * 🌃 Not tested on nighttime or extreme weather imagery
 * 🔧 Training stability is sensitive to initialization and hyperparameters
 * 📦 Requires paired hazy/clear images (currently supervised)
-
----
-
-Let me know if you'd like the README in a `.md` file or as a downloadable version.
