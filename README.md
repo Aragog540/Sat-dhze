@@ -1,6 +1,3 @@
-Here’s the **updated README** for your repository, fully aligned with the paper *"Enhanced Satellite Image Dehazing Using a CNN-Based cGAN with Cross-Scale Feature Fusion Block (CSFFB)"*:
-
----
 
 # 🌫️ Enhanced Satellite Image Dehazing Using a CNN-Based cGAN with Cross-Scale Feature Fusion Block (CSFFB)
 
