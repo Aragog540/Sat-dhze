@@ -1,44 +1,99 @@
-# [cite\_start]Enhanced Satellite Image Dehazing Using a CNN-Based cGAN with Cross-Scale Feature Fusion Block (CSFFB) [cite: 1, 2]
+Here’s the **updated README** for your repository, fully aligned with the paper *"Enhanced Satellite Image Dehazing Using a CNN-Based cGAN with Cross-Scale Feature Fusion Block (CSFFB)"*:
 
-[cite\_start]This repository contains the implementation of a deep learning framework for enhancing satellite images degraded by haze, using a *CNN-based conditional Generative Adversarial Network (cGAN)* architecture with a novel *Cross-Scale Feature Fusion Block (CSFFB)*[cite: 5, 6]. [cite\_start]The goal is to provide a robust, single-sensor dehazing solution that eliminates the complexities of multi-sensor fusion[cite: 4, 5].
+---
+
+# 🌫️ Enhanced Satellite Image Dehazing Using a CNN-Based cGAN with Cross-Scale Feature Fusion Block (CSFFB)
+
+This repository implements a robust deep learning model for enhancing hazy satellite images using a **CNN-based conditional Generative Adversarial Network (cGAN)** integrated with a novel **Cross-Scale Feature Fusion Block (CSFFB)**. The model is designed for RGB-only satellite dehazing, removing the need for auxiliary sensor data (e.g., SAR).
 
 ## 🛰 Overview
 
-[cite\_start]Hazy satellite images severely impact the quality and usability of remote sensing data[cite: 15]. This project introduces a deep learning approach that integrates:
+Haze in satellite images leads to degraded clarity and poor performance in critical remote sensing tasks like segmentation, building footprint detection, and disaster assessment. This project introduces a deep learning solution using:
 
-  - [cite\_start]A *Conditional GAN (cGAN)* architecture [cite: 5, 6, 74]
-  - [cite\_start]A *Cross-Scale Feature Fusion Block (CSFFB)* for multi-scale feature learning and fine detail preservation [cite: 5, 7, 27, 33]
-  - [cite\_start]*Progressive CNNs* and *skip connections* to preserve structural details [cite: 7, 94]
-  - [cite\_start]A combined loss function of adversarial loss and L1 reconstruction loss to balance perceptual realism and pixel-level fidelity [cite: 102, 105]
+* ✅ **Conditional GAN (cGAN)** for image-to-image translation
+* ✅ **Cross-Scale Feature Fusion Blocks (CSFFBs)** to capture multi-scale spatial features
+* ✅ **Dilated residual blocks** for context aggregation
+* ✅ **Custom loss functions** (L1 + Least Squares GAN Loss)
+* ✅ **PatchGAN** discriminator for improved texture learning
 
 ## 🔍 Key Features
 
-  - [cite\_start]✅ CNN-based cGAN hybrid structure for realistic image generation [cite: 5, 10]
-  - [cite\_start]✅ Cross-Scale Feature Fusion Blocks (CSFFBs) to enhance multi-scale feature extraction and preserve structural details [cite: 5, 7, 20]
-  - [cite\_start]✅ The architecture is designed for single-sensor (RGB-only) inputs, removing the need for auxiliary data like SAR images [cite: 5, 6, 7, 19]
-  - [cite\_start]✅ PatchGAN discriminator to encourage finer texture generation in local image patches [cite: 96]
-  - [cite\_start]✅ Benchmarked on the Hazelk dataset, which includes images with thin, moderate, and thick haze levels [cite: 8, 21]
+* 🚀 **Single-sensor solution**: Uses RGB-only images, no SAR needed
+* 🧠 **CSFFB with 5-path convolutions**: (1×1, 3×3, 1×3, 3×1, and max-pooling)
+* 🎯 **Multi-level haze handling**: Trained on Thin, Moderate, and Thick haze
+* 🧪 **Tested on Haze1k dataset** with strong benchmarks
+* 📈 **Advanced metrics support**: PSNR, SSIM, IoU, F1-Score, Pixel Accuracy, LPIPS, FID, and VIF
 
 ## 🧠 Model Architecture
 
-The proposed architecture includes:
+* **Generator**: U-Net-based encoder-decoder with:
 
-  - [cite\_start]A generator with a U-Net structure enhanced with Cross-Scale Feature Fusion Blocks (CSFFBs) and skip connections[cite: 91, 94]. [cite\_start]The CSFFB uses parallel convolutional paths with kernel sizes of $1\\times1$, $3\\times3$, $1\\times3$, and $3\\times1$, as well as a max-pooling branch[cite: 92].
-  - [cite\_start]A discriminator with a PatchGAN structure that classifies local $70\\times70$ image patches[cite: 96].
-  - [cite\_start]A combined loss function: $\\mathcal{L}*{Total} = \\mathcal{L}*{GAN} + \\lambda\\mathcal{L}\_{L1}$[cite: 104].
-  - [cite\_start]Training is performed using the Adam optimizer with a learning rate of $2\\times10^{-4}$[cite: 108].
+  * Cross-Scale Feature Fusion Blocks (CSFFB)
+  * Dilated Residual Blocks
+  * Skip connections for spatial consistency
+* **Discriminator**: PatchGAN classifies 70×70 patches
+* **Loss Functions**:
+
+  * Generator: `L_total = L_GAN + λ * L1` (λ = 100)
+  * Discriminator: Binary Cross-Entropy
+
+## 🧪 Dataset
+
+* **Name**: [Haze1k](https://www.kaggle.com/datasets/mohit3430/haze1k)
+* **Composition**: 1200 paired hazy and clear satellite images (RGB)
+* **Fog Levels**: Thin, Moderate, Thick (400 each)
+* **Train/Val/Test**: 80% / 10% / 10% split
 
 ## 📊 Results
 
-  - [cite\_start]Achieved a PSNR of 28.6 and SSIM of 0.93 on benchmark datasets[cite: 9].
-  - [cite\_start]Outperformed existing methods, including multi-sensor fusion techniques[cite: 9, 10].
-  - [cite\_start]The dehazed outputs maintain sharpness and structural definiteness[cite: 9, 33].
-  - [cite\_start]Ablation studies confirm that the CSFFB significantly improves performance on segmentation metrics like IoU, F1-Score, and Pixel Accuracy[cite: 145].
+| Metric       | Our Model |
+| ------------ | --------- |
+| **PSNR**     | 25.47     |
+| **SSIM**     | 0.9493    |
+| **IoU**      | 0.342     |
+| **F1-Score** | 0.127     |
+| **PA**       | 0.963     |
+| **LPIPS**    | 0.072     |
+| **FID**      | 9.36      |
+| **VIF**      | 0.884     |
+
+> 📌 Outperforms DCP, DehazeNet, FFA-Net, and SAR-Opt-cGAN on multiple haze levels.
 
 ## 🛠 Installation
 
 ```bash
-git clone https://github.com/Aragog540/Sat-dhze
-cd satellite-image-dehazing-cgan
+git clone https://github.com/Aragog540/Sat-dhze.git
+cd Sat-dhze
 pip install -r requirements.txt
 ```
+
+## 🏗 Training
+
+```bash
+python train.py --dataset_dir ./haze1k --epochs 125 --batch_size 4
+```
+
+Hyperparameters:
+
+* Image size: 256×256
+* Optimizer: Adam (`lr=0.0002`, `β1=0.5`)
+* Loss: LSGAN + L1
+* Normalization: `[-1, 1]` using `image / 127.5 - 1.0`
+
+## 🖼 Visual Comparison
+
+| Input | Ground Truth | DCP | DehazeNet | FFA-Net | SAR-Opt-cGAN | **Ours** |
+| ----- | ------------ | --- | --------- | ------- | ------------ | -------- |
+| 🌫️   | 🌄           | ❌   | ❌         | ✅       | ✅            | ✅✅       |
+
+
+## ⚠️ Limitations & Future Work
+
+* 🚧 High memory usage due to complex model
+* 🌃 Not tested on nighttime or extreme weather imagery
+* 🔧 Training stability is sensitive to initialization and hyperparameters
+* 📦 Requires paired hazy/clear images (currently supervised)
+
+---
+
+Let me know if you'd like the README in a `.md` file or as a downloadable version.
