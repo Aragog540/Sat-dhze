@@ -12,6 +12,7 @@ from skimage.metrics import structural_similarity as ssim
 from skimage.metrics import peak_signal_noise_ratio as psnr
 import statistics
 import os
+import numpy
 
 # Define the paths to your datasets
 base_dir = 'C:\\Users\\swaro\\Desktop\\sat dehze\\Distributed_haze1k'
